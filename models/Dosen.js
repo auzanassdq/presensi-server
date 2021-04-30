@@ -6,6 +6,7 @@ const dosenSchema = new Schema({
   nama: String,
   email: String,
   password: String,
+  username: String,
 }, {
   collection: 'dosen'
 });

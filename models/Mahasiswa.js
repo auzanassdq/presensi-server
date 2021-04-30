@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { Schema, Types } = mongoose;
 
 const mahasiswaSchema = new Schema({
+  username: String,
   nim: String,
   nama: String,
   email: String,
