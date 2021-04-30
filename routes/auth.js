@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 const {
-  getAllMahasiswa, 
+  login, 
+  regisMahasiswa,
+} = require('../controllers/auth');
 
-} = require('../controllers/mahasiswa');
-
-router.get('/', getAllMahasiswa);
+router.post('/login', login);
+router.post('/regis/mahasiswa', regisMahasiswa);
 
 module.exports = router;
