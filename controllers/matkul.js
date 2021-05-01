@@ -26,4 +26,17 @@ module.exports = {
       next(error);
     }
   },
+
+  deleteMatkul: async (req, res, next) => {
+    try {
+      const matkul = await Matkul.findById(req.params.id)
+      matkul.remove()
+
+      res.json({
+        message: "success deleted matkul",
+      })
+    } catch (error) {
+      next(error);
+    }
+  },
 }
