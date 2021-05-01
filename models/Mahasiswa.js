@@ -10,10 +10,6 @@ const mahasiswaSchema = new Schema({
   jurusan: String,
   angkatan: Number,
   semester: Number,
-  matkul: [{
-    type: Types.ObjectId,
-    ref: "matkul"
-  }]
 }, {
   collection: 'mahasiswa'
 });

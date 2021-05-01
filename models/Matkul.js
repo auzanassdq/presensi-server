@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Mahasiswa = require('./Mahasiswa');
 const { Schema, Types } = mongoose;
 
 const matkulSchema = new Schema({
@@ -10,10 +11,18 @@ const matkulSchema = new Schema({
     type: Types.ObjectId,
     ref: "dosen"
   },
+  jadwal: {
+    default : Date.now(),
+    type: Date
+  },
 }, {
   collection: 'matkul'
 });
 
-const Matkul = mongoose.model('matkul', matkulSchema);
+// matkulSchema.post('remove', function(doc, next)  {
+//   console.log(doc)
+//   next()
+// })
 
+const Matkul = mongoose.model('matkul', matkulSchema);
 module.exports = Matkul
