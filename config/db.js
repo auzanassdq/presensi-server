@@ -5,7 +5,8 @@ const database = process.env.DATABASE || 'mongodb://localhost/presensi'
 
 mongoose.connect(database, {
   useNewUrlParser: true, 
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false
 });
 
 const db = mongoose.connection;
