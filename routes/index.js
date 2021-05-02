@@ -5,6 +5,8 @@ const mahasiswaRouter = require("./mahasiswa")
 const matkulRouter = require("./matkul")
 const ambilMatkulRouter = require("./ambilMatkul")
 const pertemuanRouter = require("./pertemuan")
+const kehadiranRouter = require("./kehadiran")
+
 
 
 const auth = require('./auth');
@@ -21,6 +23,6 @@ router.use("/mahasiswa", mahasiswaRouter)
 router.use("/matkul", matkulRouter)
 router.use("/ambil-matkul", ambilMatkulRouter)
 router.use("/pertemuan", pertemuanRouter)
-
+router.use("/kehadiran", kehadiranRouter)
 
 module.exports = router;
