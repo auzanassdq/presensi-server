@@ -14,6 +14,19 @@ module.exports = {
     }
   },
 
+  getMatkulByID: async (req, res, next) => {
+    try {
+      const matkul = await Matkul.findById(req.params.id)
+
+      res.json({
+        message: "success get data matkul",
+        data: matkul
+      })
+    } catch (error) {
+      next(error)
+    }
+  },
+
   addMatkul: async (req, res, next) => {
     try {
       const matkul = await Matkul.create(req.body)
