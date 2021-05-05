@@ -27,6 +27,21 @@ module.exports = {
     }
   },
 
+  getMatkulByMahasiswa: async (req, res, next) => {
+    try {
+      const ambilMatkul = await AmbilMatkul
+      .find({mahasiswa: req.params.mahasiswaId})
+      .populate("matkul")
+
+      res.json({
+        message: "success get data",
+        data: ambilMatkul
+      })
+    } catch (error) {
+      next(error)
+    }
+  },
+
   addAmbilMatkul: async (req, res, next) => {
     try {
       const ambilMatkul = await AmbilMatkul.create(req.body)
@@ -37,5 +52,5 @@ module.exports = {
     } catch (error) {
       next(error)
     }
-  }
+  },
 }
