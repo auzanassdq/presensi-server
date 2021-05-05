@@ -1,3 +1,4 @@
+require("dotenv").config()
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const {Mahasiswa} = require('../models');
@@ -10,14 +11,16 @@ module.exports = {
   
       if (!user || !bcrypt.compareSync(data.password, user.password)) {
         res.json({message: "invalid authentication"})
+        return
       }
   
       let {_id, nim, nama, email, ...rest} = user
-      let token = jwt.sign({_id,nim,nama,email}, 'secret');
+      let token = jwt.sign({_id,nim,nama,email}, process.env.JWT_SECRET);
       
       res.json({
         message: "login success",
-        token
+        token,
+        userId: _id
       })
     } catch (error) {
       next(error)
