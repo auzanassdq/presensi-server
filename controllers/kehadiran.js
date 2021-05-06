@@ -1,6 +1,20 @@
 const { Kehadiran } = require("../models")
 
 module.exports = {
+  getKehadiran: async (req, res, next) => {
+    try {
+      let pertemuaId = req.query.pertemuanId
+      let kehadiran = await Kehadiran.findOne({pertemuan: pertemuaId})
+
+      res.json({
+        message: "success get data",
+        data: kehadiran
+      })
+    } catch (error) {
+      next(error)
+    }
+  },
+
   hadirCheckIn: async (req, res, next) => {
     try {
       const pertemuan = await Kehadiran.findOne(req.body)
