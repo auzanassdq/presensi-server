@@ -4,10 +4,12 @@ const router = express.Router();
 const { 
   getAllPertemuan,
   getPertemuanByID,
-  addPertemuan
+  addPertemuan,
+  getPertemuanMatkul
  } = require('../controllers/pertemuan');
 
 router.get('/', getAllPertemuan);
+router.get('/matkul/:matkulId', getPertemuanMatkul);
 router.get('/:id', getPertemuanByID);
 router.post('/', addPertemuan);
 
