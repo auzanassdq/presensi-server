@@ -1,6 +1,8 @@
 // var tf = require('@tensorflow/tfjs-node');
 const express = require('express');
 const router = express.Router();
+
+const authToken = require('../middlewares/authentication');
 const mahasiswaRouter = require("./mahasiswa")
 const matkulRouter = require("./matkul")
 const ambilMatkulRouter = require("./ambilMatkul")
@@ -19,6 +21,7 @@ router.get('/', async function(req, res, next) {
 });
 
 router.use("/auth", auth)
+router.use(authToken)
 router.use("/mahasiswa", mahasiswaRouter)
 router.use("/matkul", matkulRouter)
 router.use("/ambil-matkul", ambilMatkulRouter)
