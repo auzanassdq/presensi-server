@@ -3,8 +3,14 @@ const { Pertemuan } = require("../models")
 module.exports = {
   getAllPertemuan: async (req, res, next) => {
     try {
-      const pertemuan = await Pertemuan.find()
-      
+      let query = req.query
+      let pertemuan
+      if (query) {
+        pertemuan = await Pertemuan.find({matkul: query.matkul}, "-matkul -__v").populate("kehadiran").sort({nama: "desc"})
+      } else {
+        pertemuan = await Pertemuan.find()
+      }
+
       res.json({
         message: "success get data",
         data: pertemuan
