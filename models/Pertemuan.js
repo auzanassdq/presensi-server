@@ -9,6 +9,10 @@ const pertemuanSchema = new Schema({
     type: Types.ObjectId,
     ref: "matkul"
   },
+  jadwal: {
+    default : Date.now(),
+    type: Date
+  },
   kehadiran: [{
     type: Types.ObjectId,
     ref: "kehadiran"
