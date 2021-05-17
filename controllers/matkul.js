@@ -52,4 +52,17 @@ module.exports = {
       next(error);
     }
   },
+
+  editMatkul: async (req, res, next) => {
+    try {
+      const matkul = await Matkul.findByIdAndUpdate(req.params.id, req.body)
+
+      res.json({
+        message: "success edited matkul",
+        data: matkul
+      })
+    } catch (error) {
+      next(error);
+    }
+  },
 }
