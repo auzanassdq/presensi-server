@@ -1,4 +1,4 @@
-const { Pertemuan } = require("../models")
+const { Pertemuan, AmbilMatkul, Kehadiran } = require("../models")
 
 module.exports = {
   getAllPertemuan: async (req, res, next) => {
@@ -48,7 +48,17 @@ module.exports = {
 
   addPertemuan: async (req, res, next) => {
     try {
-      const pertemuan = await Pertemuan.create(req.body)
+      const pertemuan = new Pertemuan(req.body)
+
+      const mahasiswaAmbilMatkul = await AmbilMatkul.find({matkul: req.body.matkul})
+      for (let i = 0; i< mahasiswaAmbilMatkul.length; i++){
+        let kehadiran = await Kehadiran.create({
+          pertemuan: pertemuan._id,
+          mahasiswa: mahasiswaAmbilMatkul[i].mahasiswa
+        })
+        pertemuan.kehadiran.push(kehadiran._id)
+      }
+      pertemuan.save()
       
       res.json({
         message: "success create data",
@@ -58,4 +68,17 @@ module.exports = {
       next(error)
     }
   },
+
+  editPertemuanByID: async (req, res, next) => {
+    try {
+      const pertemuan = await Pertemuan.findByIdAndUpdate(req.params.id, req.body)
+
+      res.json({
+        message: "success edited matkul",
+        data: pertemuan
+      })
+    } catch (error) {
+      next(error);
+    }
+  }
 }

@@ -21,18 +21,18 @@ const pertemuanSchema = new Schema({
   collection: 'pertemuan'
 });
 
-pertemuanSchema.pre('save', async function(next)  {
-  const mahasiswaAmbilMatkul = await AmbilMatkul.find({matkul: this.matkul})
-  for (let i = 0; i< mahasiswaAmbilMatkul.length; i++){
-    let kehadiran = await Kehadiran.create({
-      pertemuan: this._id,
-      mahasiswa: mahasiswaAmbilMatkul[i].mahasiswa
-    })
-    this.kehadiran.push(kehadiran._id)
-  }
+// pertemuanSchema.pre('save', async function(next)  {
+//   const mahasiswaAmbilMatkul = await AmbilMatkul.find({matkul: this.matkul})
+//   for (let i = 0; i< mahasiswaAmbilMatkul.length; i++){
+//     let kehadiran = await Kehadiran.create({
+//       pertemuan: this._id,
+//       mahasiswa: mahasiswaAmbilMatkul[i].mahasiswa
+//     })
+//     this.kehadiran.push(kehadiran._id)
+//   }
 
-  next()
-})
+//   next()
+// })
 
 const Pertemuan = mongoose.model('pertemuan', pertemuanSchema);
 
