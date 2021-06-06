@@ -9,7 +9,7 @@ const mahasiswaSchema = new Schema({
   password: String,
   jurusan: String,
   angkatan: Number,
-  semester: Number,
+  // semester: Number,
 }, {
   collection: 'mahasiswa'
 });
