@@ -3,7 +3,19 @@ const {Matkul} = require('../models');
 module.exports = {
   getAllMatkul: async (req, res, next) => {
     try {
-      const matkul = await Matkul.find()
+      const cariMatkul = req.query.matkul
+      let matkul
+
+      console.log(cariMatkul);
+
+      if (cariMatkul) {
+        console.log("YESSSS");
+        matkul = await Matkul.find({nama : {$regex: cariMatkul, $options : 'i'}})
+      } else {
+        matkul = await Matkul.find()
+      }
+
+      console.log(matkul);
 
       res.json({
         message: "success get data matkul",
