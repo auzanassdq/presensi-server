@@ -4,6 +4,7 @@ const router = express.Router();
 
 const authToken = require('../middlewares/authentication');
 const mahasiswaRouter = require("./mahasiswa")
+const dosenRouter = require("./dosen")
 const matkulRouter = require("./matkul")
 const ambilMatkulRouter = require("./ambilMatkul")
 const pertemuanRouter = require("./pertemuan")
@@ -23,6 +24,7 @@ router.get('/', async function(req, res, next) {
 router.use("/auth", auth)
 router.use(authToken)
 router.use("/mahasiswa", mahasiswaRouter)
+router.use("/dosen", dosenRouter)
 router.use("/matkul", matkulRouter)
 router.use("/ambil-matkul", ambilMatkulRouter)
 router.use("/pertemuan", pertemuanRouter)
