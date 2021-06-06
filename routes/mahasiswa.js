@@ -5,6 +5,8 @@ const {
   getAllMahasiswa, 
   getMahasiswaByID, 
   addMahasiswa, 
+  editMahasiswaByID,
+  deleteMahasiswaByID,
   addMatkulToMahasiswa,
   delMatkulFromMahasiswa,
 } = require('../controllers/mahasiswa');
@@ -12,7 +14,9 @@ const {
 router.get('/', getAllMahasiswa);
 router.get('/:id', getMahasiswaByID);
 router.post('/', addMahasiswa);
-router.put("/matkul-add/:id", addMatkulToMahasiswa)
-router.put("/matkul-del/:id", delMatkulFromMahasiswa)
+router.put('/:id', editMahasiswaByID);
+router.delete('/:id', deleteMahasiswaByID);
+// router.put("/matkul-add/:id", addMatkulToMahasiswa)
+// router.put("/matkul-del/:id", delMatkulFromMahasiswa)
 
 module.exports = router;

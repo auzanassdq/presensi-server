@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs');
+
 const {Mahasiswa} = require('../models');
 
 module.exports = {
@@ -29,11 +31,55 @@ module.exports = {
 
   addMahasiswa: async (req, res, next) => {
     try {
-      const mahasiswa = await Mahasiswa.create(req.body)
+      let data = { ...req.body }
+
+      const salt = bcrypt.genSaltSync(10);
+      const hash = bcrypt.hashSync(data.password, salt);
+      data.password = hash
+
+      const mahasiswa = await Mahasiswa.create(data)
+      // const mahasiswa = await Mahasiswa.create(req.body)
 
       res.json({
         message: "success add data mahasiswa",
         data: mahasiswa
+      })
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  editMahasiswaByID: async (req, res, next) => {
+    try {
+      let {password, ...data} = { ...req.body }
+      let mahasiswa
+
+      if (password == "") {
+        mahasiswa = await Mahasiswa.findByIdAndUpdate(req.params.id, data)
+      } else {
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(password, salt);
+        data.password = hash
+
+        mahasiswa = await Mahasiswa.findByIdAndUpdate(req.params.id, data)
+      }
+
+      res.json({
+        message: "success edited mahasiswa",
+        data: mahasiswa
+      })
+    } catch (error) {
+      next(error);
+    }
+  }, 
+
+  deleteMahasiswaByID: async (req, res, next) => {
+    try {
+      const mahasiswa = await Mahasiswa.findById(req.params.id)
+      mahasiswa.remove()
+
+      res.json({
+        message: "success deleted mahasiswa",
       })
     } catch (error) {
       next(error);
