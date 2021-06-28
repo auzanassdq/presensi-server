@@ -12,7 +12,7 @@ module.exports = {
         console.log("YESSSS");
         matkul = await Matkul.find({nama : {$regex: cariMatkul, $options : 'i'}})
       } else {
-        matkul = await Matkul.find()
+        matkul = await Matkul.find().populate("dosen", "_id, nama")
       }
 
       console.log(matkul);

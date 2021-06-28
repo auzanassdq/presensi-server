@@ -7,7 +7,7 @@ const matkulSchema = new Schema({
   nama: String,
   sks: Number,
   semester: Number,
-  pengajar: {
+  dosen: {
     type: Types.ObjectId,
     ref: "dosen"
   },
