@@ -182,4 +182,17 @@ module.exports = {
       next(error);
     }
   },
+
+  deletePertemuan: async (req, res) => {
+    try {
+      const pertemuan = await Pertemuan.findById(req.params.id)
+      pertemuan.remove()
+
+      res.json({
+        message: "success deleted pertemuan",
+      })
+    } catch (error) {
+      next(error);
+    }
+  }
 };
