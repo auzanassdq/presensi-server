@@ -21,7 +21,7 @@ app.use("/img/:filename", (req, res) => {
   res.sendFile(path.join(__dirname, `/image/${req.params.filename}`));
 });
 
-app.use('/', indexRouter);
+app.use(indexRouter);
 // app.use('/users', usersRouter);
 app.use(errorHandler)
 
