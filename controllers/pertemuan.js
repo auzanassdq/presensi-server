@@ -6,7 +6,7 @@ module.exports = {
     try {
       let query = req.query;
       let pertemuan;
-      if (query) {
+      if (query.matkul) {
         pertemuan = await Pertemuan.find(
           { matkul: query.matkul },
           "-matkul -__v"
@@ -183,7 +183,7 @@ module.exports = {
     }
   },
 
-  deletePertemuan: async (req, res) => {
+  deletePertemuan: async (req, res, next) => {
     try {
       const pertemuan = await Pertemuan.findById(req.params.id)
       pertemuan.remove()

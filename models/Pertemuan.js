@@ -34,6 +34,10 @@ const pertemuanSchema = new Schema({
 //   next()
 // })
 
+pertemuanSchema.pre('remove', async function() {
+  await Kehadiran.deleteMany({pertemuan: this._id})
+})
+
 const Pertemuan = mongoose.model('pertemuan', pertemuanSchema);
 
 module.exports = Pertemuan
